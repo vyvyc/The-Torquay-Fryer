@@ -1,4 +1,4 @@
-const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+const navLinks = Array.from(document.querySelectorAll('.site-header nav a[href^="#"]'));
 const sections = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
 
 const setCurrent = () => {
