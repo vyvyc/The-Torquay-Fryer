@@ -1,15 +1,41 @@
 const navLinks = Array.from(document.querySelectorAll('.site-header nav a[href^="#"]'));
-const sections = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+const sections = navLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
 
-const setCurrent = () => {
-  const y = window.scrollY + Math.min(window.innerHeight * 0.38, 360);
-  const current = sections.reduce((active, section) => section.offsetTop <= y ? section : active, sections[0]);
+const setCurrentNav = (sectionId) => {
   navLinks.forEach((link) => {
-    link.toggleAttribute('aria-current', link.getAttribute('href') === `#${current.id}`);
-    if (link.hasAttribute('aria-current')) link.setAttribute('aria-current', 'page');
+    const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 };
 
-window.addEventListener('scroll', setCurrent, { passive: true });
-window.addEventListener('resize', setCurrent);
-setCurrent();
+if (navLinks.length && sections.length) {
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) {
+        setCurrentNav(visible.target.id);
+      }
+    }, {
+      rootMargin: "-28% 0px -55% 0px",
+      threshold: [0.12, 0.28, 0.5]
+    });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => setCurrentNav(link.getAttribute("href").slice(1)));
+  });
+
+  const hashTarget = window.location.hash && document.querySelector(window.location.hash);
+  setCurrentNav(hashTarget ? hashTarget.id : sections[0].id);
+}

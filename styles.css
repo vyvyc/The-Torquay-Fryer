@@ -36,7 +36,7 @@ h1, h2 {
   letter-spacing: 0;
   text-wrap: balance;
 }
-h1 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: .95; }
+h1 { font-size: clamp(3rem, 6vw, 5.25rem); line-height: .96; }
 h2 { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1; }
 h3 { font-size: 1.12rem; line-height: 1.2; }
 
@@ -137,7 +137,7 @@ h3 { font-size: 1.12rem; line-height: 1.2; }
   overflow: hidden;
   color: var(--cream);
   background: var(--dark);
-  padding: 8.8rem max(1.35rem, calc((100vw - 1180px) / 2)) 6.5rem;
+  padding: 7.4rem max(1.35rem, calc((100vw - 1180px) / 2)) 5.8rem;
 }
 .hero-media,
 .hero-media img,
@@ -505,7 +505,7 @@ footer {
   }
   .hero {
     min-height: 96svh;
-    padding-top: 9.7rem;
+    padding-top: 8.2rem;
   }
   .hero-panel {
     position: relative;
@@ -547,7 +547,7 @@ footer {
 
 @media (max-width: 620px) {
   :root { --shell: min(100vw - 30px, 1180px); }
-  h1 { font-size: clamp(2.7rem, 15vw, 4.4rem); }
+  h1 { font-size: clamp(2.45rem, 11.6vw, 3.35rem); }
   h2 { font-size: clamp(2.05rem, 11vw, 3.3rem); }
   .site-header { min-height: 92px; }
   .brand-name { white-space: normal; }
